@@ -37,8 +37,6 @@ export class ReportsService {
       throw new NotFoundException('Report not found');
     }
 
-    console.log(report);
-
     report.approved = approved;
 
     return this.repo.save(report);

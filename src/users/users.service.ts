@@ -13,8 +13,7 @@ export class UsersService {
   }
 
   async findOne(id: number) {
-    if(!id) {
-      console.log('entrei aqui no service')
+    if (!id) {
       return null;
     }
     return await this.repo.findOneBy({ id });
@@ -27,8 +26,8 @@ export class UsersService {
   async update(id: number, attrs: Partial<User>) {
     const user = await this.repo.findOneBy({ id });
 
-    if(!user) {
-      throw new NotAcceptableException(`User with id ${id} not found`)
+    if (!user) {
+      throw new NotAcceptableException(`User with id ${id} not found`);
     }
 
     Object.assign(user, attrs);
@@ -39,11 +38,10 @@ export class UsersService {
   async remove(id: number) {
     const user = await this.repo.findOneBy({ id });
 
-    if(!user) {
-      throw new NotAcceptableException(`User with id ${id} not found`)
+    if (!user) {
+      throw new NotAcceptableException(`User with id ${id} not found`);
     }
 
     return await this.repo.remove(user);
   }
-
 }
