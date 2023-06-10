@@ -5,16 +5,24 @@ import {
   Patch,
   Post,
   UseGuards,
+  Get,
+  Query,
 } from '@nestjs/common';
-import { CreateReportDto } from './dtos/create-report.dto';
-import { ReportsService } from './reports.service';
-import { AuthGuard } from '../guards/auth.guard';
-import { CurrentUser } from '../users/decorators/current-user.decorator';
-import { User } from 'src/users/user.entity';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+
 import { ReportDto } from './dtos/report.dto';
 import { AproveReportDto } from './dtos/aprove-report.dto';
+import { CreateReportDto } from './dtos/create-report.dto';
+import { ReportsService } from './reports.service';
+import { GetEstimateDto } from './dtos/get-estimate.dto';
+
+import { AuthGuard } from '../guards/auth.guard';
 import { AdminGuard } from '../guards/admin.guard';
+
+import { CurrentUser } from '../users/decorators/current-user.decorator';
+
+import { User } from 'src/users/user.entity';
+
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 @Serialize(ReportDto)
 @Controller('reports')
 export class ReportsController {
@@ -47,5 +55,10 @@ export class ReportsController {
     @Body() { approved }: AproveReportDto,
   ) {
     return await this.reportsService.changeApproval(id, approved);
+  }
+
+  @Get('/')
+  getEstimate(@Query() query: GetEstimateDto) {
+    return this.reportsService.createEstimate(query);
   }
 }
