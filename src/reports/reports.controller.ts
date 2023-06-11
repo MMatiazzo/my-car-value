@@ -20,9 +20,9 @@ import { AdminGuard } from '../guards/admin.guard';
 
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 
-import { User } from 'src/users/user.entity';
+import { User } from '../users/user.entity';
 
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 @Serialize(ReportDto)
 @Controller('reports')
 export class ReportsController {
